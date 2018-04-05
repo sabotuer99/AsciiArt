@@ -12,14 +12,14 @@ public class PixelMapper {
 		if(image.length != 16 || image[0].length != 8)
 			throw new IllegalArgumentException("Input must be 8x16");
 		
-		PixelSet A = new PixelSet();
-		PixelSet B = new PixelSet();
 		long bestScore = Long.MAX_VALUE;
 		String bestChar = "";
 		
 		for(File map : getMapFiles()){
 			Scanner file = new Scanner(Files.newInputStream(map.toPath()));
 			String rep = file.nextLine();
+			PixelSet A = new PixelSet();
+			PixelSet B = new PixelSet();
 			//use map file to assign pixels to respective maps
 			for(int row = 0; row < 16; row++){
 				String line = file.nextLine();

@@ -22,6 +22,42 @@ public class PixelMapperTests {
 		assertEquals(",", result);
 	}
 	
+	@Test
+	public void bestCharacter_givenObviousPeriodPic_returnsPeriod() throws IOException{
+		int[][] image = get2d("period_test.png");
+		PixelMapper sut = new PixelMapper();
+		String result = sut.bestCharacter(image);
+		
+		assertEquals(".", result);
+	}
+	
+	@Test
+	public void bestCharacter_givenObviousSlashPic_returnsSlash() throws IOException{
+		int[][] image = get2d("slash_test.png");
+		PixelMapper sut = new PixelMapper();
+		String result = sut.bestCharacter(image);
+		
+		assertEquals("/", result);
+	}
+	
+	@Test
+	public void bestCharacter_givenObviousBackslashPic_returnsBackslash() throws IOException{
+		int[][] image = get2d("backslash_test.png");
+		PixelMapper sut = new PixelMapper();
+		String result = sut.bestCharacter(image);
+		
+		assertEquals("\\", result);
+	}
+	
+	@Test
+	public void bestCharacter_givenObviousUnderscorePic_returnsUnderscore() throws IOException{
+		int[][] image = get2d("underscore_test.png");
+		PixelMapper sut = new PixelMapper();
+		String result = sut.bestCharacter(image);
+		
+		assertEquals("_", result);
+	}
+	
 	int[][] get2d(String filename) throws IOException{
 		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 		BufferedImage bi = ImageIO.read(classLoader.getResourceAsStream(filename));
