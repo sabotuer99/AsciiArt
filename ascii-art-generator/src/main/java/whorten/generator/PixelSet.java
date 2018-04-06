@@ -15,7 +15,7 @@ public class PixelSet {
 		pixels.add(new Pixel(r,g,b));
 	}
 	
-	public long squaredError(){
+	public Pixel getAveragePixel(){
 		//first, get average of r, g, b
 		double aveR = 0;
 		double aveG = 0;
@@ -31,37 +31,20 @@ public class PixelSet {
 		aveG /= pixels.size();
 		aveB /= pixels.size();
 		
+		return new Pixel((int)aveR, (int)aveG, (int)aveB);
+	}
+	
+	public long squaredError(){
+		
+		Pixel avg = getAveragePixel();
+		
 		//get total sum of squared error
 		long error = 0;
 		for(Pixel p : pixels){
-			error += (long)Math.pow(Math.abs(p.getRed() * 1.0 - aveR),2);
-			error += (long)Math.pow(Math.abs(p.getGreen() * 1.0 - aveG),2);
-			error += (long)Math.pow(Math.abs(p.getBlue() * 1.0 - aveB),2);
+			error += (long)Math.pow(Math.abs(p.getRed() - avg.getRed()),2);
+			error += (long)Math.pow(Math.abs(p.getGreen() - avg.getGreen()),2);
+			error += (long)Math.pow(Math.abs(p.getBlue() - avg.getBlue()),2);
 		}
 		return error;
-	}
-	
-	private class Pixel{
-		private final int r;
-		private final int g;
-		private final int b;
-		
-		Pixel(int r, int g, int b){
-			this.r = r;
-			this.g = g;
-			this.b = b;
-		}
-		
-		int getRed(){
-			return r;
-		}
-		
-		int getGreen(){
-			return g;
-		}
-		
-		int getBlue(){
-			return b;
-		}
 	}
 }

@@ -58,6 +58,24 @@ public class PixelMapperTests {
 		assertEquals("_", result);
 	}
 	
+	@Test
+	public void bestCharacter_givenObviousHashPic_returnsHash() throws IOException{
+		int[][] image = get2d("hash_test.png");
+		PixelMapper sut = new PixelMapper();
+		String result = sut.bestCharacter(image);
+		
+		assertEquals("#", result);
+	}
+	
+	@Test
+	public void bestCharacter_givenObviousAtPic_returnsAt() throws IOException{
+		int[][] image = get2d("at_test.png");
+		PixelMapper sut = new PixelMapper();
+		String result = sut.bestCharacter(image);
+		
+		assertEquals("@", result);
+	}
+	
 	int[][] get2d(String filename) throws IOException{
 		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 		BufferedImage bi = ImageIO.read(classLoader.getResourceAsStream(filename));

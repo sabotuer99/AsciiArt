@@ -6,6 +6,8 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.util.Scanner;
 
+import whorten.colors.Colors;
+
 public class PixelMapper {
 
 	public String bestCharacter(int[][] image) throws IOException{
@@ -41,19 +43,22 @@ public class PixelMapper {
 			file.close();
 						
 			long scoreThisFile = A.squaredError() + B.squaredError();
-			System.out.println("Score for '" + rep + "': " + scoreThisFile);
+			//System.out.println("Score for '" + rep + "': " + scoreThisFile);
 					
 			if(scoreThisFile < bestScore){
 				bestScore = scoreThisFile;
-				bestChar = rep;
+				//append(Colors.foreground(red, green, blue))
+				Pixel avgA = A.getAveragePixel();
+				Pixel avgB = B.getAveragePixel();
+				bestChar = Colors.foreground(avgB.getRed(), avgB.getGreen(), avgB.getBlue()) + 
+						   //Colors.background(avgA.getRed(), avgA.getGreen(), avgA.getBlue()) + 
+						   rep +
+						   Colors.RESET_ALL;
 			}
 		}
 		
 		return bestChar;
 	}
-	
-	
-	
 	
 	protected File[] getMapFiles() {
 		ClassLoader loader = ClassLoader.getSystemClassLoader();
